@@ -32,6 +32,7 @@ final Map<String, String> arabic = {
   'text_editing': 'محرر النصوص',
   'intro_your_self':'قدم نفسك',
 
+
   ///SETTING
   'setting': 'الإعدادات',
   'profile':'الملف الشخصي',

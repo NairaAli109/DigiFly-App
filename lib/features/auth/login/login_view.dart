@@ -1,5 +1,6 @@
-// ignore_for_file: avoid_print
 
+// ignore_for_file: avoid_print
+import 'package:digifly_task/core/routes/app_router.dart';
 import 'package:digifly_task/core/widgets/auth_custom_text_field.dart';
 import 'package:digifly_task/core/widgets/auth_header_text.dart';
 import 'package:digifly_task/core/widgets/auth_logo.dart';
