@@ -1,4 +1,3 @@
-
 // ignore_for_file: avoid_print
 
 import 'package:digifly_task/core/colors/colors.dart';
@@ -18,7 +17,6 @@ class TextEditorView extends StatefulWidget {
 }
 
 class _TextEditorViewState extends State<TextEditorView> {
-
   final TextEditingController _controller = TextEditingController();
 
   final List<String> _history = []; // لتخزين النصوص السابقة

@@ -5,8 +5,6 @@ import 'package:digifly_task/core/widgets/user_profile_image.dart';
 import 'package:digifly_task/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});

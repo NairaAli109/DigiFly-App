@@ -43,4 +43,7 @@ final Map<String, String> english = {
 
   ///Profile
   'edit_profile':'Edit Account',
+  'first_name':'First name',
+  'last_name':'Last name',
+  'save':'Save',
 };

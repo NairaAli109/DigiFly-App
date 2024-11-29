@@ -1,4 +1,3 @@
-
 import 'package:digifly_task/core/localization/translation.dart';
 import 'package:digifly_task/core/routes/app_router.dart';
 import 'package:flutter/material.dart';

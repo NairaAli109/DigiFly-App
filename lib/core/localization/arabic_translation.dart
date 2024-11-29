@@ -19,30 +19,31 @@ final Map<String, String> arabic = {
 
   ///HOME
   'home': 'الرئيسية',
-  'welcome':'مرحباً بك',
-  'search':'ابحث هنا ...',
-  'ahmed_alaa':'أحمد علاء',
-  'best_seller':'الأفضل مبيعاً',
-  'view_all':'عرض الكل',
-  'default_box_number':'بوكس افتراضي, رقم 1',
-  'category':'فئة 1',
-  'L.E':'1500 ج.م',
+  'welcome': 'مرحباً بك',
+  'search': 'ابحث هنا ...',
+  'ahmed_alaa': 'أحمد علاء',
+  'best_seller': 'الأفضل مبيعاً',
+  'view_all': 'عرض الكل',
+  'default_box_number': 'بوكس افتراضي, رقم 1',
+  'category': 'فئة 1',
+  'L.E': '1500 ج.م',
 
   ///TEXT EDITING
   'text_editing': 'محرر النصوص',
-  'intro_your_self':'قدم نفسك',
-
+  'intro_your_self': 'قدم نفسك',
 
   ///SETTING
   'setting': 'الإعدادات',
-  'profile':'الملف الشخصي',
-  'language':'اللغات',
-  'contact_us':'تواصل معنا',
-  'call_us':'اتصل بنا',
-  'about_us':'من نحن',
-  'logout':'تسجيل الخروج',
+  'profile': 'الملف الشخصي',
+  'language': 'اللغات',
+  'contact_us': 'تواصل معنا',
+  'call_us': 'اتصل بنا',
+  'about_us': 'من نحن',
+  'logout': 'تسجيل الخروج',
 
   ///Profile
-  'edit_profile':'المعلومات الأساسية',
-
+  'edit_profile': 'المعلومات الأساسية',
+  'first_name': 'الإسم الأول',
+  'last_name': 'الإسم الأخير',
+  'save':'حفظ',
 };
