@@ -4,6 +4,7 @@ import 'package:digifly_task/core/widgets/auth_custom_text_field.dart';
 import 'package:digifly_task/core/widgets/auth_header_text.dart';
 import 'package:digifly_task/core/widgets/auth_logo.dart';
 import 'package:digifly_task/core/widgets/auth_custom_button.dart';
+import 'package:digifly_task/features/auth/logic/auth_services.dart';
 import 'package:digifly_task/features/auth/login/widgets/forgot_pass_button.dart';
 import 'package:digifly_task/features/auth/login/widgets/google_button.dart';
 import 'package:digifly_task/features/auth/login/widgets/or_text.dart';
@@ -30,6 +31,23 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool passwordVisibility = false;
+
+  void _login(String email, String password) async {
+    bool success = await AuthServices.loginUser(email, password);
+
+    if (success) {
+      print("Login Successful!");
+      context.pushReplacementNamed(BottomNavBar.id);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login Successful...')),
+      );
+    } else {
+      print("Invalid Email or Password");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('email or password is wrong')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,9 +127,10 @@ class _LoginViewState extends State<LoginView> {
                       if (_formKey.currentState!.validate()) {
                         // If all validations pass
                         print("Form is valid");
-                        setState(() {
-                          context.pushReplacementNamed(BottomNavBar.id);
-                        });
+                        _login(
+                          emailController.text.trim(),
+                          passwordController.text.trim(),
+                        );
                       } else {
                         // If validation fails
                         print("Form is invalid");

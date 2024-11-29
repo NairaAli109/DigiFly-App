@@ -23,5 +23,6 @@ class Assets {
   static const String imagesSignOut = 'assets/images/sign_out.png';
   static const String imagesTextEditingIvon = 'assets/images/text_editing_ivon.png';
   static const String imagesUserImage = 'assets/images/user_image.png';
+  static const String jsonFilesUsers = 'assets/json_files/users.json';
 
 }
