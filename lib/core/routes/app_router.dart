@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 
 abstract class AppRouter {
   static GoRouter goRouter = GoRouter(
-    initialLocation: BottomNavBar.id,
+    initialLocation: LoginView.id,
     routes: [
       GoRoute(
         path: LoginView.id,

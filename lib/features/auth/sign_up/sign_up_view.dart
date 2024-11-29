@@ -5,6 +5,7 @@ import 'package:digifly_task/core/widgets/auth_custom_button.dart';
 import 'package:digifly_task/core/widgets/auth_custom_text_field.dart';
 import 'package:digifly_task/core/widgets/auth_header_text.dart';
 import 'package:digifly_task/core/widgets/auth_logo.dart';
+import 'package:digifly_task/features/auth/logic/auth_services.dart';
 import 'package:digifly_task/features/auth/login/login_view.dart';
 import 'package:digifly_task/features/home/bottom_nav_bar.dart';
 import 'package:digifly_task/generated/assets.dart';
@@ -28,6 +29,20 @@ class _SignUpViewState extends State<SignUpView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool passwordVisibility = false;
   bool confirmPasswordVisibility = false;
+
+  void _register(String name, String email, String password) async {
+    Map<String, dynamic> newUser = {
+      "name": name,
+      "email": email,
+      "password": password,
+    };
+
+    await AuthServices.addUser(newUser);
+    context.pushReplacementNamed(BottomNavBar.id);
+    print("User Registered Successfully!");
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Signup Successful! You can now log in.')),
+    );  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,9 +152,11 @@ class _SignUpViewState extends State<SignUpView> {
                       if (_formKey.currentState!.validate()) {
                         // If all validations pass
                         print("Form is valid");
-                        setState(() {
-                          context.pushReplacementNamed(BottomNavBar.id);
-                        });
+                        _register(
+                          usrNameController.text.trim(),
+                          emailController.text.trim(),
+                          passwordController.text.trim(),
+                        );
                       } else {
                         // If validation fails
                         print("Form is invalid");
