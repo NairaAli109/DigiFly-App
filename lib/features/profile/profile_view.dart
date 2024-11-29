@@ -1,6 +1,5 @@
 import 'package:digifly_task/core/colors/colors.dart';
 import 'package:digifly_task/core/widgets/auth_custom_button.dart';
-import 'package:digifly_task/core/widgets/auth_custom_text_field.dart';
 import 'package:digifly_task/features/profile/widgets/profile_editing_email.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
