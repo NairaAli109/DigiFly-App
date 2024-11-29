@@ -1,3 +1,6 @@
+
+// ignore_for_file: avoid_print
+
 import 'package:digifly_task/core/colors/colors.dart';
 import 'package:digifly_task/features/home/home_view.dart';
 import 'package:digifly_task/features/setting/setting_view.dart';

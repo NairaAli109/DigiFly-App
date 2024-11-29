@@ -13,5 +13,7 @@ class AppColors {
   static const lightGreenColor = Color(0xff46BC8A);
   static const whiteColor = Color(0xffFFFFFF);
   static const lightWhiteColor = Color(0xffF7F7FB);
+  static  Color textEditorFieldColor = const Color(0xff6D5CBC).withOpacity(0.02);
+  static  Color textEditorFieldBorderColor = const Color(0xffF1EFF9);
   static Color redColor = const Color(0xffC50030);
 }

@@ -1,3 +1,6 @@
+
+// ignore_for_file: avoid_print
+
 import 'package:digifly_task/core/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -30,6 +30,7 @@ final Map<String, String> english = {
 
   ///TEXT EDITING
   'text_editing': 'Text Editor',
+  'intro_your_self':'Introduce your self',
 
   ///SETTING
   'setting': 'Setting',

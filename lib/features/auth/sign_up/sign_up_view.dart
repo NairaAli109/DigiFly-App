@@ -1,3 +1,6 @@
+
+// ignore_for_file: avoid_print
+
 import 'package:digifly_task/core/widgets/auth_another_option_text.dart';
 import 'package:digifly_task/core/widgets/auth_custom_button.dart';
 import 'package:digifly_task/core/widgets/auth_custom_text_field.dart';

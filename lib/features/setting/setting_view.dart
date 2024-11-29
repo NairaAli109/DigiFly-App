@@ -1,6 +1,7 @@
+
+// ignore_for_file: avoid_print
+
 import 'package:digifly_task/core/colors/colors.dart';
-import 'package:digifly_task/core/routes/app_router.dart';
-import 'package:digifly_task/core/widgets/auth_custom_button.dart';
 import 'package:digifly_task/core/widgets/profile_side_text.dart';
 import 'package:digifly_task/core/widgets/user_profile_image.dart';
 import 'package:digifly_task/features/auth/login/login_view.dart';
