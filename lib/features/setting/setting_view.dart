@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:digifly_task/core/colors/colors.dart';
+import 'package:digifly_task/core/shared_pref/shared_pref.dart';
 import 'package:digifly_task/core/widgets/profile_side_text.dart';
 import 'package:digifly_task/core/widgets/user_profile_image.dart';
 import 'package:digifly_task/features/auth/login/login_view.dart';
@@ -111,8 +112,11 @@ class _SettingViewState extends State<SettingView> {
                   SettingItem(
                     icon: Assets.imagesSignOut,
                     text: 'logout',
-                    onTap: () {
-                      context.pushReplacementNamed(LoginView.id);
+                    onTap: ()async {
+                      await SharedPref().logOut();
+                      if(await SharedPref().logOut()){
+                        context.pushReplacementNamed(LoginView.id);
+                      }
                     },
                     isArrowBack: false,
                     isLangButton: false,

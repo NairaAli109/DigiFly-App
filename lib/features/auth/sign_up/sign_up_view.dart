@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:digifly_task/core/shared_pref/shared_pref.dart';
 import 'package:digifly_task/core/widgets/auth_another_option_text.dart';
 import 'package:digifly_task/core/widgets/auth_custom_button.dart';
 import 'package:digifly_task/core/widgets/auth_custom_text_field.dart';
@@ -38,6 +39,7 @@ class _SignUpViewState extends State<SignUpView> {
     };
 
     await AuthServices.addUser(newUser);
+    await SharedPref().setLoginForFirstTime();
     context.pushReplacementNamed(BottomNavBar.id);
     print("User Registered Successfully!");
     ScaffoldMessenger.of(context).showSnackBar(

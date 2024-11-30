@@ -13,17 +13,14 @@ class AuthServices {
     final filePath = await _getWritableFilePath();
     final file = File(filePath);
 
-    // تحقق إذا كان الملف موجودًا
     if (!(await file.exists())) {
-      // إذا لم يكن موجودًا، قم بنسخه من assets
       final data = await rootBundle.loadString('assets/json_files/users.json');
       await file.writeAsString(data);
     }
   }
 
-  // قراءة البيانات من الملف
   static Future<Map<String, dynamic>> readJsonFile() async {
-    await _copyFileFromAssets(); // تأكد من أن الملف موجود
+    await _copyFileFromAssets();
     try {
       final filePath = await _getWritableFilePath();
       final file = File(filePath);
@@ -38,9 +35,8 @@ class AuthServices {
     return {"users": []}; // بيانات فارغة في حال وجود خطأ
   }
 
-  // كتابة البيانات إلى الملف
   static Future<void> writeJsonFile(Map<String, dynamic> data) async {
-    await _copyFileFromAssets(); // تأكد من وجود الملف
+    await _copyFileFromAssets();
     try {
       final filePath = await _getWritableFilePath();
       final file = File(filePath);
@@ -50,23 +46,21 @@ class AuthServices {
     }
   }
 
-  // إضافة مستخدم جديد
   static Future<void> addUser(Map<String, dynamic> newUser) async {
     Map<String, dynamic> jsonData = await readJsonFile();
     jsonData["users"].add(newUser);
     await writeJsonFile(jsonData);
   }
 
-  // التحقق من بيانات تسجيل الدخول
   static Future<bool> loginUser(String email, String password) async {
     Map<String, dynamic> jsonData = await readJsonFile();
     List<dynamic> users = jsonData["users"];
 
     for (var user in users) {
       if (user["email"] == email && user["password"] == password) {
-        return true; // تسجيل دخول ناجح
+        return true;
       }
     }
-    return false; // بيانات غير صحيحة
+    return false;
   }
 }
