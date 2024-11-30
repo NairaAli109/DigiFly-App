@@ -25,6 +25,7 @@ class _HomeViewState extends State<HomeView> {
             padding: EdgeInsetsDirectional.only(
                 start: 16.w, end: 16.w, bottom: 19.h, top: 12.h),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const HomeAppBar(),
                 SearchField(),

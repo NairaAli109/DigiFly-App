@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DiscountContainer extends StatelessWidget {
-  const DiscountContainer({super.key});
+  const DiscountContainer({super.key, required this.discount});
 
+  final String discount;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -17,7 +18,7 @@ class DiscountContainer extends StatelessWidget {
           borderRadius: BorderRadius.circular(2.r),
         ),
         child: Text(
-          '-17%',
+          '-$discount%',
           style: TextStyle(
             color: AppColors.whiteColor,
             fontSize: 12.sp,

@@ -1,11 +1,11 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:digifly_task/core/colors/colors.dart';
 import 'package:digifly_task/core/shared_pref/shared_pref.dart';
-import 'package:digifly_task/core/widgets/profile_side_text.dart';
 import 'package:digifly_task/core/widgets/user_profile_image.dart';
 import 'package:digifly_task/features/auth/login/login_view.dart';
 import 'package:digifly_task/features/profile/profile_view.dart';
+import 'package:digifly_task/features/setting/widgets/email_text.dart';
 import 'package:digifly_task/features/setting/widgets/setting_header_text.dart';
 import 'package:digifly_task/features/setting/widgets/setting_item.dart';
 import 'package:digifly_task/generated/assets.dart';
@@ -13,10 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../core/widgets/user_name_text.dart';
 
 class SettingView extends StatefulWidget {
+  static const String id = "/setting";
+
   const SettingView({super.key});
 
   @override
@@ -53,7 +54,7 @@ class _SettingViewState extends State<SettingView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       UserNameText(fontSize: 14),
-                      ProfileSideText(text: 'ahmed.alaa123@gmail.com')
+                      EmailText(),
                     ],
                   ),
                 ],
@@ -80,12 +81,24 @@ class _SettingViewState extends State<SettingView> {
                       if (Get.locale == const Locale("ar")) {
                         setState(() {
                           Get.updateLocale(const Locale('en'));
+                          SharedPref().saveLanguageCode('en');
                           print(Get.locale);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text(
+                                    "Language translated successfully to English")),
+                          );
                         });
                       } else if (Get.locale == const Locale("en")) {
                         setState(() {
                           Get.updateLocale(const Locale('ar'));
+                          SharedPref().saveLanguageCode('ar');
                           print(Get.locale);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text(
+                                    "تم تغيير اللغه الي اللغه العربيه بنجاح")),
+                          );
                         });
                       }
                     },
@@ -112,10 +125,13 @@ class _SettingViewState extends State<SettingView> {
                   SettingItem(
                     icon: Assets.imagesSignOut,
                     text: 'logout',
-                    onTap: ()async {
+                    onTap: () async {
                       await SharedPref().logOut();
-                      if(await SharedPref().logOut()){
+                      if (await SharedPref().logOut()) {
                         context.pushReplacementNamed(LoginView.id);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                           SnackBar(content: Text("Logout_Successfully".tr)),
+                        );
                       }
                     },
                     isArrowBack: false,

@@ -9,6 +9,7 @@ final Map<String, String> english = {
   'continue_with_google': 'Continue with Google',
   'or': 'Or',
   'do_not_have_an_acc': "Don't have an account?",
+  "login_success":'Login Successful...',
 
   ///SIGN UP
   'already_have_an_account': 'Already have an account ?',
@@ -16,6 +17,7 @@ final Map<String, String> english = {
   'user_name': 'Username',
   'confirm_pass': 'Confirm password',
   'create_acc': 'Sign up',
+  'register_success':'Signup Successful! You can now log in.',
 
   ///HOME
   'home': 'Home',
@@ -25,8 +27,13 @@ final Map<String, String> english = {
   'best_seller':'Best seller',
   'view_all':'View all',
   'default_box_number':'Default box, number 1',
-  'category':'Category 1',
-  'L.E':'1500 L.E',
+  'category':'Category',
+  'L.E':'L.E',
+  'Laptop':'Laptop',
+  'Smartphone':'Smartphone',
+  'AirPods':'AirPods',
+  'Camera':'Camera',
+  'Pinaple':'Pineapple',
 
   ///TEXT EDITING
   'text_editing': 'Text Editor',
@@ -40,6 +47,8 @@ final Map<String, String> english = {
   'call_us':'Call us',
   'about_us':'About us',
   'logout':'Sign out',
+  'Logout_Successfully':'Logout Successfully',
+  'edited_success':'Edited saved successfully',
 
   ///Profile
   'edit_profile':'Edit Account',

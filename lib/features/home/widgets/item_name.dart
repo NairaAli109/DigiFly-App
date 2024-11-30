@@ -4,12 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ItemName extends StatelessWidget {
-  const ItemName({super.key});
+  const ItemName({super.key, required this.productName});
+
+  final String productName;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      "default_box_number".tr,
+      productName.tr,
       style: TextStyle(
         fontWeight: FontWeight.w700,
         fontSize: 14.sp,

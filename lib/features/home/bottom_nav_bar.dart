@@ -10,15 +10,34 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  const BottomNavBar({super.key, this.navigatedIndex});
   static const String id = "/BottomNavBar";
+  final int? navigatedIndex;
+
+  static void switchToTab(BuildContext context, int index) {
+    final _BottomNavBarState? state =
+    context.findAncestorStateOfType<_BottomNavBarState>();
+    state?.updateSelectedIndex(index);
+  }
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _currentIndex = 0;
+
+  late int _currentIndex ;
+
+  void updateSelectedIndex(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.navigatedIndex ?? 0;
+  }
 
   final List<Widget> _screens = [
     const HomeView(),
@@ -30,7 +49,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
-      body: _screens[_currentIndex],
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _screens,
+      ),
+      // body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColors.whiteColor,
 
