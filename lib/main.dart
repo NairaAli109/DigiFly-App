@@ -1,10 +1,17 @@
 import 'package:digifly_task/core/localization/translation.dart';
 import 'package:digifly_task/core/routes/app_router.dart';
+import 'package:digifly_task/core/shared_pref/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main()async {
+  ///for ensuring that SharedPreferences created
+  WidgetsFlutterBinding.ensureInitialized();
+
+  ///create SharedPreferences instance
+  await SharedPref().initSharedPref();
+
   runApp(const MyApp());
 }
 

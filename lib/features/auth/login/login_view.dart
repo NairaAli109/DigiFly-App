@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:digifly_task/core/shared_pref/shared_pref.dart';
 import 'package:digifly_task/core/widgets/auth_custom_text_field.dart';
 import 'package:digifly_task/core/widgets/auth_header_text.dart';
 import 'package:digifly_task/core/widgets/auth_logo.dart';
@@ -37,6 +38,7 @@ class _LoginViewState extends State<LoginView> {
 
     if (success) {
       print("Login Successful!");
+      await SharedPref().setLoginForFirstTime();
       context.pushReplacementNamed(BottomNavBar.id);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login Successful...')),
