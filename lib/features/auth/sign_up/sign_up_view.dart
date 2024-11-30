@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:digifly_task/core/shared_pref/shared_pref.dart';
 import 'package:digifly_task/core/widgets/auth_another_option_text.dart';
@@ -6,12 +6,15 @@ import 'package:digifly_task/core/widgets/auth_custom_button.dart';
 import 'package:digifly_task/core/widgets/auth_custom_text_field.dart';
 import 'package:digifly_task/core/widgets/auth_header_text.dart';
 import 'package:digifly_task/core/widgets/auth_logo.dart';
-import 'package:digifly_task/features/auth/logic/auth_services.dart';
+// ignore: unused_import
+import 'package:digifly_task/features/home/services/get_user_data_services.dart';
 import 'package:digifly_task/features/auth/login/login_view.dart';
+import 'package:digifly_task/features/auth/sign_up/services/signup_services.dart';
 import 'package:digifly_task/features/home/bottom_nav_bar.dart';
 import 'package:digifly_task/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpView extends StatefulWidget {
@@ -38,13 +41,14 @@ class _SignUpViewState extends State<SignUpView> {
       "password": password,
     };
 
-    await AuthServices.addUser(newUser);
+    await SignUpServices.addUser(newUser);
     await SharedPref().setLoginForFirstTime();
     context.pushReplacementNamed(BottomNavBar.id);
     print("User Registered Successfully!");
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Signup Successful! You can now log in.')),
-    );  }
+       SnackBar(content: Text('register_success'.tr)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

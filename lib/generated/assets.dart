@@ -2,7 +2,9 @@
 class Assets {
   Assets._();
 
+  static const String imagesAirpods = 'assets/images/airpods.png';
   static const String imagesBoxImage = 'assets/images/box_image.png';
+  static const String imagesCamera = 'assets/images/camera.png';
   static const String imagesContact = 'assets/images/contact.png';
   static const String imagesEmailIcon = 'assets/images/email_icon.png';
   static const String imagesExclamation = 'assets/images/exclamation.png';
@@ -13,9 +15,12 @@ class Assets {
   static const String imagesHomeIcon = 'assets/images/home_icon.png';
   static const String imagesHomeList1 = 'assets/images/home_list1.png';
   static const String imagesLanguageIcon = 'assets/images/language_icon.png';
+  static const String imagesLaptop = 'assets/images/laptop.png';
   static const String imagesLockIcon = 'assets/images/lock_icon.png';
   static const String imagesLogo = 'assets/images/logo.png';
+  static const String imagesMobile = 'assets/images/mobile.png';
   static const String imagesNotificationsIcon = 'assets/images/notifications_icon.png';
+  static const String imagesPinaple = 'assets/images/pinaple.png';
   static const String imagesProductFavIcon = 'assets/images/product_fav_icon.png';
   static const String imagesProfile = 'assets/images/profile.png';
   static const String imagesSearchIcon = 'assets/images/search_icon.png';
@@ -23,6 +28,8 @@ class Assets {
   static const String imagesSignOut = 'assets/images/sign_out.png';
   static const String imagesTextEditingIvon = 'assets/images/text_editing_ivon.png';
   static const String imagesUserImage = 'assets/images/user_image.png';
+  static const String imagesUserPic = 'assets/images/user_pic.png';
+  static const String jsonFilesBestSellerData = 'assets/json_files/best_seller_data.json';
   static const String jsonFilesUsers = 'assets/json_files/users.json';
 
 }

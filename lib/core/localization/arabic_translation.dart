@@ -9,6 +9,7 @@ final Map<String, String> arabic = {
   'continue_with_google': 'سجل عن طريق جوجل',
   'or': 'أو',
   'do_not_have_an_acc': 'ليس لديك حساب ؟',
+  'login_success':'تم تسجيل الدخول بنجاح',
 
   ///SIGN UP
   'create_new_acc': 'إنشاء حساب جديد',
@@ -16,6 +17,7 @@ final Map<String, String> arabic = {
   'confirm_pass': 'تأكيد كلمة المرور',
   'create_acc': 'إنشاء حساب',
   'already_have_an_account': 'لديك حساب بالفعل ؟',
+  'register_success':'تم إنشاء الحساب بنجاح',
 
   ///HOME
   'home': 'الرئيسية',
@@ -25,8 +27,13 @@ final Map<String, String> arabic = {
   'best_seller': 'الأفضل مبيعاً',
   'view_all': 'عرض الكل',
   'default_box_number': 'بوكس افتراضي, رقم 1',
-  'category': 'فئة 1',
-  'L.E': '1500 ج.م',
+  'category': 'فئة',
+  'L.E': 'ج.م',
+  'Laptop':'حاسوب',
+  'Smartphone':'هاتف محمول',
+  'AirPods':'سماعات لاسيلكيه',
+  'Camera':'كاميرا تصوير',
+  'Pinaple':'أناناس',
 
   ///TEXT EDITING
   'text_editing': 'محرر النصوص',
@@ -40,6 +47,8 @@ final Map<String, String> arabic = {
   'call_us': 'اتصل بنا',
   'about_us': 'من نحن',
   'logout': 'تسجيل الخروج',
+  'Logout_Successfully':'تم تسجيل الخروج بنجاح',
+  'edited_success':'تم تعديل البيانات بنجاح',
 
   ///Profile
   'edit_profile': 'المعلومات الأساسية',

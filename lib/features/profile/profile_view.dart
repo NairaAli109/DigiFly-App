@@ -1,9 +1,14 @@
 import 'package:digifly_task/core/colors/colors.dart';
 import 'package:digifly_task/core/widgets/auth_custom_button.dart';
-import 'package:digifly_task/features/profile/widgets/profile_editing_email.dart';
+import 'package:digifly_task/features/home/bottom_nav_bar.dart';
+import 'package:digifly_task/features/profile/widgets/edit_profile_header_text.dart';
+import 'package:digifly_task/features/profile/widgets/last_name_profile_edit.dart';
+import 'package:digifly_task/features/profile/widgets/name_editing_field.dart';
+import 'package:digifly_task/features/profile/widgets/emai_editing_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -42,56 +47,29 @@ class _ProfileViewState extends State<ProfileView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "email".tr,
-                        style: TextStyle(
-                            color: AppColors.darkGreyColor,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.sp),
-                      ),
+                      const EditProfileHeaderText(text: 'email'),
                       SizedBox(height: 8.h),
-                      ProfileEditingEmail(
-                          controller: emailController,
-                          hintText: "ahmed.alaa123@gmail.com",
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) {
-                            return null;
-                          }),
-                      Text(
-                        "first_name".tr,
-                        style: TextStyle(
-                            color: AppColors.darkGreyColor,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.sp),
-                      ),
+                      EmailEditingField(emailController: emailController),
+                      const EditProfileHeaderText(text: 'first_name'),
                       SizedBox(height: 8.h),
-                      ProfileEditingEmail(
-                          controller: emailController,
-                          hintText: "ahmed_alaa".tr.split(RegExp(r'\s+'))[0],
-                          keyboardType: TextInputType.text,
-                          validator: (value) {
-                            return null;
-                          }),
-                      Text(
-                        "last_name".tr,
-                        style: TextStyle(
-                            color: AppColors.darkGreyColor,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.sp),
+                      FirstNameEditingField(
+                        nameController: firstNameController,
                       ),
+                      const EditProfileHeaderText(text: 'last_name'),
                       SizedBox(height: 8.h),
-                      ProfileEditingEmail(
-                          controller: emailController,
-                          hintText: "ahmed_alaa".tr.split(RegExp(r'\s+'))[1],
-                          keyboardType: TextInputType.text,
-                          validator: (value) {
-                            return null;
-                          }),
+                      LastNameEditingField(
+                        nameController: lastNameController,
+                      ),
                     ],
                   ),
                 )),
                 AuthCustomButton(
-                  onTap: () {},
+                  onTap: () {
+                    context.pushNamed(BottomNavBar.id, extra: 0);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                       SnackBar(content: Text("edited_success".tr)),
+                    );
+                  },
                   text: 'save'.tr,
                 ),
               ],

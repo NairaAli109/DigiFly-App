@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "name": "Laptop",
+      "image": "assets/images/laptop.png",
+      "price": 1200,
+      "category_number": 1,
+      "discount": 17,
+      "is_fav": false
+    },
+    {
+      "name": "Smartphone",
+      "image": "assets/images/mobile.png",
+      "price": 800,
+      "category_number": 1,
+      "discount": 20,
+      "is_fav": false
+    },
+    {
+      "name": "AirPods",
+      "image": "assets/images/airpods.png",
+      "price": 150,
+      "category_number": 1,
+      "discount": 10,
+      "is_fav": false
+    },
+    {
+      "name": "Camera",
+      "image": "assets/images/camera.png",
+      "price": 5000,
+      "category_number": 1,
+      "discount": 40,
+      "is_fav": false
+    },
+    {
+      "name": "Pinaple",
+      "image": "assets/images/pinaple.png",
+      "price": 5000,
+      "category_number": 2,
+      "discount": 5,
+      "is_fav": false
+    }
+  ]
+}

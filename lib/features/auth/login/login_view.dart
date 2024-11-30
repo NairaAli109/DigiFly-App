@@ -1,11 +1,11 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:digifly_task/core/shared_pref/shared_pref.dart';
 import 'package:digifly_task/core/widgets/auth_custom_text_field.dart';
 import 'package:digifly_task/core/widgets/auth_header_text.dart';
 import 'package:digifly_task/core/widgets/auth_logo.dart';
 import 'package:digifly_task/core/widgets/auth_custom_button.dart';
-import 'package:digifly_task/features/auth/logic/auth_services.dart';
+import 'package:digifly_task/features/auth/login/serivces/login_services.dart';
 import 'package:digifly_task/features/auth/login/widgets/forgot_pass_button.dart';
 import 'package:digifly_task/features/auth/login/widgets/google_button.dart';
 import 'package:digifly_task/features/auth/login/widgets/or_text.dart';
@@ -15,6 +15,7 @@ import 'package:digifly_task/features/home/bottom_nav_bar.dart';
 import 'package:digifly_task/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/widgets/auth_another_option_text.dart';
@@ -34,14 +35,14 @@ class _LoginViewState extends State<LoginView> {
   bool passwordVisibility = false;
 
   void _login(String email, String password) async {
-    bool success = await AuthServices.loginUser(email, password);
+    bool success = await LoginServices.loginUser(email, password);
 
     if (success) {
       print("Login Successful!");
       await SharedPref().setLoginForFirstTime();
       context.pushReplacementNamed(BottomNavBar.id);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login Successful...')),
+         SnackBar(content: Text('login_success'.tr)),
       );
     } else {
       print("Invalid Email or Password");
@@ -108,10 +109,10 @@ class _LoginViewState extends State<LoginView> {
                   isPassword: true,
                   passwordVisibility: passwordVisibility,
                   suffixIconTap: () {
-                   setState(() {
-                     passwordVisibility = !passwordVisibility;
-                     print(passwordVisibility);
-                   });
+                    setState(() {
+                      passwordVisibility = !passwordVisibility;
+                      print(passwordVisibility);
+                    });
                   },
                 ),
                 //forget pass and remember me button
@@ -148,9 +149,9 @@ class _LoginViewState extends State<LoginView> {
                   text: 'do_not_have_an_acc',
                   buttonText: 'create_acc',
                   onTap: () {
-                   setState(() {
-                     context.pushNamed(SignUpView.id);
-                   });
+                    setState(() {
+                      context.pushNamed(SignUpView.id);
+                    });
                   },
                 )
               ],
