@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "600841488096",
+    "project_id": "digifly-app-1e1f8",
+    "storage_bucket": "digifly-app-1e1f8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600841488096:android:f09b76ea5cb31f7918b285",
+        "android_client_info": {
+          "package_name": "com.example.digifly_task"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600841488096-38p0obcr0rh84b8iv5njtd2cbebnmv5s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.digifly_task",
+            "certificate_hash": "d7fb4b44e47aa4dbad071ee3c62239f67de4e8d8"
+          }
+        },
+        {
+          "client_id": "600841488096-qlsqtj3bsaa5518lkenlp07e4bpl71dl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3EPpiafJ2RcuU8xYD_L8loj_D5-k9eNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600841488096-qlsqtj3bsaa5518lkenlp07e4bpl71dl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

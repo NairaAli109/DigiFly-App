@@ -3,8 +3,6 @@
 import 'package:digifly_task/core/colors/colors.dart';
 import 'package:digifly_task/features/text_editing/widgets/editor_header_text.dart';
 import 'package:digifly_task/features/text_editing/widgets/editor_text_field.dart';
-import 'package:digifly_task/features/text_editing/widgets/editor_tool_bar.dart';
-import 'package:digifly_task/features/text_editing/widgets/undo_redo_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -57,6 +55,38 @@ class _TextEditorViewState extends State<TextEditorView> {
     });
   }
 
+  void _undo() {
+    if (_historyIndex > 0) {
+      setState(() {
+        _historyIndex--;
+        _updateControllerText(); // تحديث الحقل النصي
+      });
+      print('Undo -> History: $_history');
+      print('Undo -> Current Index: $_historyIndex');
+    } else {
+      print('Undo -> No action performed');
+    }
+  }
+
+  void _redo() {
+    // تأكد أن هناك خطوة يمكن القيام بها
+    if (_historyIndex < _history.length - 1) {
+      setState(() {
+        _historyIndex++; // الانتقال إلى النص التالي في القائمة
+        _updateControllerText(); // تحديث النصوص في الحقل النصي
+      });
+      print('Redo -> History: $_history');
+      print('Redo -> Current Index: $_historyIndex');
+    } else {
+      // لا يوجد نص يمكن إعادة التقدم إليه
+      print('Redo -> No action performed');
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Nothing found to redo"),
+        duration: Duration(milliseconds: 1500),
+      ));
+    }
+  }
+
   //count words
   int get _wordCount {
     //removing white spaces at the start or end of the text
@@ -68,30 +98,66 @@ class _TextEditorViewState extends State<TextEditorView> {
     return text.split(RegExp(r'\s+')).length;
   }
 
-  final bool _isUpdatingText = false;
+  bool _isUpdatingText = false;
+  void _addBulletPoint() {
+    setState(() {
+      final text = _controller.text;
+      final newText = "$text • "; // إضافة نقطة في بداية السطر
+      _controller.text = newText;
+      _controller.selection =
+          TextSelection.collapsed(offset: _controller.text.length);
+    });
+  }
+
+  int _bulletCount = 1; // لحساب النقاط أو الأرقام في القائمة
+
+  void _addNumberedPoint() {
+    setState(() {
+      final text = _controller.text;
+      final newText = "$text .$_bulletCount "; // إضافة رقم في بداية السطر
+      _controller.text = newText;
+      _controller.selection =
+          TextSelection.collapsed(offset: _controller.text.length);
+      _bulletCount++; // زيادة الرقم
+    });
+  }
 
   void _onTextChanged(String text) {
-    if (_isUpdatingText) {
-      setState(() {
-        if (_history.isEmpty || text != _history.last) {
-          if (_historyIndex < _history.length - 1) {
-            _history.removeRange(_historyIndex + 1, _history.length);
-          }
-          _history.add(text);
-          _historyIndex = _history.length - 1;
+    if (!_isUpdatingText) {
+      // إضافة النصوص فقط إذا كانت مختلفة عن النص الأخير
+      if (_history.isEmpty || text != _history.last) {
+        if (_historyIndex < _history.length - 1) {
+          _history.removeRange(_historyIndex + 1, _history.length);
         }
-      });
+        _history.add(text);
+        _historyIndex = _history.length - 1;
+      }
     }
-    // طباعة للتحقق من النصوص الحالية
     print('Text Changed -> History: $_history');
     print('Text Changed -> Current Index: $_historyIndex');
+  }
+
+  void _updateControllerText() {
+    _isUpdatingText = true; // منع تشغيل الاستماع أثناء التحديث
+    _controller.value = TextEditingValue(
+      text: _history[_historyIndex],
+      selection:
+          TextSelection.collapsed(offset: _history[_historyIndex].length),
+    );
+    _isUpdatingText = false; // انتهاء التحديث
+    print('Updated Controller Text: ${_controller.text}');
   }
 
   @override
   void initState() {
     super.initState();
+    _history.add(_controller.text); // تسجيل النص الأولي
+    _historyIndex = 0; // ضبط المؤشر
     _controller.addListener(() {
       _onTextChanged(_controller.text);
+      setState(() {
+        _wordCount;
+      });
     });
   }
 
@@ -128,25 +194,85 @@ class _TextEditorViewState extends State<TextEditorView> {
                   children: [
                     const EditorHeaderText(),
                     const Spacer(),
-                    UndoRedoButton(
-                      historyIndex: _historyIndex,
-                      history: _history,
-                      isUpdatingText: _isUpdatingText,
-                      controller: _controller,
+                    CircleAvatar(
+                      radius: 20.r,
+                      backgroundColor: AppColors.veryLightGreyColor,
+                      child: IconButton(
+                        icon: const Icon(Icons.undo),
+                        onPressed: _undo,
+                      ),
                     ),
+                    SizedBox(width: 3.w),
+                    CircleAvatar(
+                      radius: 20.r,
+                      backgroundColor: AppColors.veryLightGreyColor,
+                      child: IconButton(
+                        icon: const Icon(Icons.redo),
+                        onPressed: _redo,
+                      ),
+                    )
                   ],
                 ),
                 SizedBox(height: 24.h),
-                EditorToolBar(
-                  controller: _controller,
-                  isUnderline: _isUnderline,
-                  textAlign: _textAlign,
-                  isBold: _isBold,
-                  toggleBold: _toggleBold,
-                  leftAlign: _changeTextAlignToLeft,
-                  rightAlign: _changeTextAlignToRight,
-                  centerAlign: _changeTextAlignToCenter,
-                  toggleUnderline: _toggleUnderline,
+                Container(
+                  height: 48.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.textEditorFieldColor,
+                    border:
+                        Border.all(color: AppColors.textEditorFieldBorderColor),
+                  ),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        IconButton(
+                            onPressed: _changeTextAlignToLeft,
+                            icon: const Icon(Icons.format_align_left)),
+                        VerticalDivider(
+                            color: AppColors.textEditorFieldBorderColor),
+                        IconButton(
+                            onPressed: _changeTextAlignToCenter,
+                            icon:
+                                const Icon(Icons.format_align_center_outlined)),
+                        VerticalDivider(
+                            color: AppColors.textEditorFieldBorderColor),
+                        IconButton(
+                            onPressed: _changeTextAlignToRight,
+                            icon: const Icon(Icons.format_align_right)),
+                        VerticalDivider(
+                            color: AppColors.textEditorFieldBorderColor),
+                        IconButton(
+                            onPressed: _addBulletPoint,
+                            icon: const Icon(Icons.format_list_bulleted_sharp)),
+                        VerticalDivider(
+                            color: AppColors.textEditorFieldBorderColor),
+                        IconButton(
+                            onPressed: _addNumberedPoint,
+                            icon: const Icon(
+                                Icons.format_list_numbered_outlined)),
+                        VerticalDivider(
+                            color: AppColors.textEditorFieldBorderColor),
+                        IconButton(
+                            onPressed: _toggleBold,
+                            icon: Icon(
+                              Icons.format_bold,
+                              color: _isBold
+                                  ? AppColors.blackColor
+                                  : AppColors.lightBlackColor,
+                            )),
+                        VerticalDivider(
+                            color: AppColors.textEditorFieldBorderColor),
+                        IconButton(
+                            onPressed: _toggleUnderline,
+                            icon: Icon(
+                              Icons.format_underline,
+                              color: _isUnderline
+                                  ? AppColors.blackColor
+                                  : AppColors.lightBlackColor,
+                            ))
+                      ],
+                    ),
+                  ),
                 ),
                 EditorTextField(
                   controller: _controller,

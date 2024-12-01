@@ -46,6 +46,9 @@ class _LastNameEditingFieldState extends State<LastNameEditingField> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CustomShimmerText(width: 100);
         } else if (snapshot.hasData && snapshot.data != null) {
+          nameController.text = snapshot.data!.split(RegExp(r'\s+')).length > 1
+              ? snapshot.data!.split(RegExp(r'\s+'))[1] // إذا كان هناك اسم أخير
+              : "Last Name";
           return ProfileEditingField(
             controller: nameController,
             hintText: snapshot.data!.split(RegExp(r'\s+')).length > 1

@@ -25,10 +25,8 @@ class _EmailEditingFieldState extends State<EmailEditingField> {
   Future<void> _updateEmail() async {
     String newEmail = widget.emailController.text;
 
-    // تحديث البيانات في الملف
     await UpdateUserDataServices.updateUserEmail(newEmail);
 
-    // تحديث الواجهة
     setState(() {
       _emailFuture = Future.value(newEmail);
     });
@@ -37,6 +35,7 @@ class _EmailEditingFieldState extends State<EmailEditingField> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = widget.emailController;
+
     return FutureBuilder<String?>(
       future: _emailFuture,
       builder: (context, snapshot) {
