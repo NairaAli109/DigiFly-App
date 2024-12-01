@@ -1,6 +1,7 @@
 import 'package:digifly_task/core/colors/colors.dart';
 import 'package:digifly_task/core/widgets/profile_side_text.dart';
 import 'package:digifly_task/features/home/services/get_user_data_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/widgets/custom_shimmer_text.dart';
@@ -10,6 +11,7 @@ class EmailText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final firebaseUser = FirebaseAuth.instance.currentUser;
     return FutureBuilder<String?>(
       future: GetUserDataServices.getUserEmail(),
       builder: (context, snapshot) {
@@ -17,7 +19,7 @@ class EmailText extends StatelessWidget {
           return const CustomShimmerText(width: 200);
         } else if (snapshot.hasData && snapshot.data != null) {
           return Text(
-            snapshot.data!,
+            firebaseUser != null ? firebaseUser.email! : snapshot.data!,
             style: TextStyle(
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w600,

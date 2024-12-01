@@ -1,8 +1,12 @@
 import 'package:digifly_task/core/colors/colors.dart';
+import 'package:digifly_task/core/shared_pref/shared_pref.dart';
+import 'package:digifly_task/features/auth/login/serivces/google_login.dart';
+import 'package:digifly_task/features/home/bottom_nav_bar.dart';
 import 'package:digifly_task/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class GoogleButton extends StatefulWidget {
   const GoogleButton({super.key});
@@ -18,7 +22,14 @@ class _GoogleButtonState extends State<GoogleButton> {
       children: [
         SizedBox(height: 24.h),
         InkWell(
-          onTap: () {},
+          onTap: () async {
+            await GoogleLogin.signInWithGoogle().then((_) {
+              SharedPref().setLoginForFirstTime();
+              context.pushReplacementNamed(BottomNavBar.id);
+            }).catchError((error) {
+              print("Error during Google Sign-In: $error");
+            });
+          },
           child: Container(
               height: 48.h,
               decoration: BoxDecoration(

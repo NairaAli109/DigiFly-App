@@ -26,10 +26,8 @@ class _FirstNameEditingFieldState extends State<FirstNameEditingField> {
   Future<void> _updateName() async {
     String newName = widget.nameController.text;
 
-    // تحديث البيانات في الملف
     await UpdateUserDataServices.updateUserFirstName(newName);
 
-    // تحديث الواجهة
     setState(() {
       _nameFuture = Future.value(newName);
     });
@@ -45,6 +43,7 @@ class _FirstNameEditingFieldState extends State<FirstNameEditingField> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CustomShimmerText(width: 100);
         } else if (snapshot.hasData && snapshot.data != null) {
+          nameController.text = snapshot.data!.split(RegExp(r'\s+'))[0];
           return ProfileEditingField(
             controller: nameController,
             hintText: snapshot.data!.split(RegExp(r'\s+'))[0],

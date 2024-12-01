@@ -1,8 +1,6 @@
 import 'package:digifly_task/core/localization/translation.dart';
 import 'package:digifly_task/core/routes/app_router.dart';
 import 'package:digifly_task/core/shared_pref/shared_pref.dart';
-// ignore: unused_import
-import 'package:digifly_task/features/profile/widgets/name_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +10,6 @@ void main() async {
   ///for ensuring that SharedPreferences created
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   ///create SharedPreferences instance
   await SharedPref().initSharedPref();
 

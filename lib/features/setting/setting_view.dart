@@ -9,10 +9,12 @@ import 'package:digifly_task/features/setting/widgets/email_text.dart';
 import 'package:digifly_task/features/setting/widgets/setting_header_text.dart';
 import 'package:digifly_task/features/setting/widgets/setting_item.dart';
 import 'package:digifly_task/generated/assets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../../core/widgets/user_name_text.dart';
 
 class SettingView extends StatefulWidget {
@@ -126,17 +128,33 @@ class _SettingViewState extends State<SettingView> {
                     icon: Assets.imagesSignOut,
                     text: 'logout',
                     onTap: () async {
-                      await SharedPref().logOut();
-                      if (await SharedPref().logOut()) {
+                      try {
+                        await SharedPref().logOut();
+
+                        final firebaseUser = FirebaseAuth.instance.currentUser;
+                        if (firebaseUser != null) {
+                          GoogleSignIn googleSignIn = GoogleSignIn();
+                          await googleSignIn.disconnect();
+                        }
+
+                        await FirebaseAuth.instance.signOut();
+
                         context.pushReplacementNamed(LoginView.id);
+
                         ScaffoldMessenger.of(context).showSnackBar(
-                           SnackBar(content: Text("Logout_Successfully".tr)),
+                          SnackBar(content: Text("Logout Successfully".tr)),
+                        );
+                      } catch (e) {
+                        print("Error during logout: $e");
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Logout Failed".tr)),
                         );
                       }
                     },
                     isArrowBack: false,
                     isLangButton: false,
                   ),
+
                 ],
               )
             ],
